@@ -49,6 +49,12 @@ public class Person {
         this.hobbies.add(hobby);
         hobby.addPerson(this);
     }
+    public void removeHobby(Hobby hobby) {
+        if (this.hobbies.remove(hobby)) {
+            hobby.removePerson(this);
+        }
+    }
+
 
     public List<Hobby> getHobbies() {
         return hobbies;

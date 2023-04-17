@@ -40,6 +40,26 @@ public class PersonFacade {
         return emf.createEntityManager();
     }
 
+
+    public boolean removeHobbyFromPerson(Long personId, Long hobbyId) {
+        EntityManager em = getEntityManager();
+        Person person = em.find(Person.class, personId);
+        Hobby hobby = em.find(Hobby.class, hobbyId);
+        if (person == null || hobby == null)
+            throw new IllegalArgumentException("Person or Hobby not found");
+        person.removeHobby(hobby);
+        try {
+            em.getTransaction().begin();
+            em.merge(person);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            em.close();
+        }
+        return true;
+    }
+
     public PersonDTO addHobby(Long personId, Long hobbyId) {
         EntityManager em = getEntityManager();
         Person person = em.find(Person.class, personId);
@@ -48,7 +68,7 @@ public class PersonFacade {
         try {
             em.getTransaction().begin();
             em.merge(person);
-           // em.merge(hobby);
+            // em.merge(hobby);
             em.getTransaction().commit();
         } finally {
             em.close();

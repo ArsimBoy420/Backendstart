@@ -30,6 +30,8 @@ public class Hobby {
     }
 
 
+
+
     public Long getId() {
         return id;
     }
@@ -65,5 +67,9 @@ public class Hobby {
 
     public void addPerson(Person person) {
         this.persons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        this.persons.remove(person);
     }
 }

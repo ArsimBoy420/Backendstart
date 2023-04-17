@@ -12,10 +12,10 @@ import entities.Hobby;
 import entities.Person;
 
 import javax.persistence.EntityManagerFactory;
+
 import utils.EMF_Creator;
 
 /**
- *
  * @author tha
  */
 public class Populator {
@@ -27,14 +27,16 @@ public class Populator {
         fe.addHobby(p1.getId(), h1.getId());
 
     }
-    public static void pop2(){
+
+    public static void removeHobbyFromPersonTest() {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade fe = PersonFacade.getPersonFacade(emf);
-        PersonDTO p1 = fe.create(new PersonDTO(new Person("Jens", 45)));
+        fe.removeHobbyFromPerson(1L, 1L);
+
 
     }
 
     public static void main(String[] args) {
-populate();
+        System.out.println();
     }
 }
