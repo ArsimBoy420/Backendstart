@@ -125,7 +125,7 @@ public class LoginEndpointTest {
                 .statusCode(200)
                 .body("msg", equalTo("Hello anonymous"));
     }
-    
+
      */
 
     @Test
