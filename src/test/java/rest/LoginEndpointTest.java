@@ -115,7 +115,7 @@ public class LoginEndpointTest {
         given().when().get("/info").then().statusCode(200);
     }
 
-    /*
+
     @Test
     public void testRestNoAuthenticationRequired() {
         given()
@@ -126,7 +126,7 @@ public class LoginEndpointTest {
                 .body("msg", equalTo("Hello anonymous"));
     }
 
-     */
+
 
     @Test
     public void testRestForAdmin() {
