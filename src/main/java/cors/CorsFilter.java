@@ -8,7 +8,7 @@ import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-
+// explanation of cors filter can be found here: https://www.baeldung.com/cors-in-jax-rs
 @Provider
 @PreMatching
 public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilter {

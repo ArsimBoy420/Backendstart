@@ -55,11 +55,16 @@ public class User implements Serializable {
   //TODO Change when password is hashed
    public boolean verifyPassword(String pw){
     return BCrypt.checkpw(pw, userPass);
+    // Returns true if the password matches the hash.
+     // Under the hood it uses the same salt that was used to create the hash to verify the password.
     }
 
   public User(String userName, String userPass) {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    // Hashes the password. The gensalt() method automatically generates a salt to use for hashing.
+    // The parameter determines the complexity of the hash, with 10 being a reasonable default.
+    // The two combined make this relatively safe against brute-force attacks.
   }
 
 
