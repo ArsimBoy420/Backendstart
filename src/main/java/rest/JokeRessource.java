@@ -17,11 +17,9 @@ import javax.ws.rs.core.Response;
 
 @Path("joke")
 public class JokeRessource {
-
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final JokeFacade FACADE =  JokeFacade.getJokeFacade(EMF);
-
+    private static final JokeFacade FACADE = JokeFacade.getJokeFacade(EMF);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -30,8 +28,4 @@ public class JokeRessource {
         System.out.println(jokeDTO);
         return Response.ok().entity(GSON.toJson(jokeDTO)).build();
     }
-
-
-
-
 }
