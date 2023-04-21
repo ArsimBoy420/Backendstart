@@ -119,11 +119,5 @@ public class PersonFacade {
         return PersonDTO.getDtos(rms);
     }
 
-    public static void main(String[] args) {
-        emf = EMF_Creator.createEntityManagerFactory();
-        PersonFacade fe = getPersonFacade(emf);
-        fe.create(new PersonDTO(new Person("Kurt", 42)));
-        fe.getAll().forEach(dto -> System.out.println(dto));
-    }
 
 }
