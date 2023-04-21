@@ -33,8 +33,9 @@ public class FlagResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
-        return "{\"msg\":\"Hello World\"}";
+        return "{\"msg\":\"flag endpoint\"}";
     }
+
     @Path("{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

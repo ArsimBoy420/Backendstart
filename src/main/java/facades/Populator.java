@@ -13,7 +13,10 @@ import entities.Person;
 
 import javax.persistence.EntityManagerFactory;
 
+import errorhandling.NotFoundException;
 import utils.EMF_Creator;
+
+import java.io.IOException;
 
 /**
  * @author tha
@@ -35,6 +38,8 @@ public class Populator {
 
 
     }
+
+
 
     public static void main(String[] args) {
         populate();
