@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import dtos.FlagDTO;
 import dtos.JokeDTO;
 import dtos.RenameMeDTO;
+import entities.Flag;
 import entities.RenameMe;
+import errorhandling.NotFoundException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -77,6 +79,79 @@ public class FlagFacade {
     }
 
 
+    public Flag create(Flag flag) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(flag);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return flag;
+    }
+
+    public Flag update(Flag flag) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Flag found = em.find(Flag.class, flag.getId());
+        if (found == null) {
+            throw new NotFoundException("Entity with ID: " + flag.getId() + " not found");
+        }
+        // update values here
+        try {
+            em.getTransaction().begin();
+            Flag updated = em.merge(flag);
+            em.getTransaction().commit();
+            return updated;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Flag delete(Long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Flag found = em.find(Flag.class, id);
+        if (found == null) {
+            throw new NotFoundException("Could not remove Entity with id: " + id);
+        }
+        try {
+            em.getTransaction().begin();
+            em.remove(found);
+            em.getTransaction().commit();
+            return found;
+        } finally {
+            em.close();
+        }
+    }
+    public Flag getById(Long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Flag flag;
+        try {
+            flag = em.find(Flag.class, id);
+            if (flag == null) {
+                throw new NotFoundException();
+            }
+        } finally {
+            em.close();
+        }
+        return flag;
+    }
+    public List<Flag> getAll() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Flag> query = em.createQuery("SELECT z FROM Flag z", Flag.class);
+        return query.getResultList();
+    }
+
+
+    public Flag getByName(String name) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Flag> query = em.createQuery("SELECT f FROM Flag f WHERE f.countryName = '"+name+"'", Flag.class);
+        List<Flag> flags = query.getResultList();
+        if (flags.size() == 0) {
+            throw new NotFoundException("No flag found named '"+name+"'");
+        }
+        return flags.get(0);
+    }
 
 
 

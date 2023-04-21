@@ -26,22 +26,18 @@ public class User implements Serializable {
   private String userPass;
 
   @Basic(optional = false)
-  @NotNull
   @Column(name = "points")
   private Long points;
 
   @Basic(optional = false)
-  @NotNull
   @Column(name = "answered")
   private Long answered;              // questions answered
 
   @Basic(optional = false)
-  @NotNull
   @Column(name = "correct")
   private Long correct;               // questions answered correctly
 
   @Basic(optional = false)
-  @NotNull
   @Column(name = "incorrect")
   private Long incorrect;           // questions answered incorrectly
 
@@ -53,7 +49,6 @@ public class User implements Serializable {
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
   private List<Quiz> quizzes;
-
 
 
   public List<String> getRolesAsStrings() {
@@ -93,13 +88,10 @@ public class User implements Serializable {
     this.answered = 0L;
     this.correct = 0L;
     this.incorrect = 0L;
-
     // Hashes the password. The gensalt() method automatically generates a salt to use for hashing.
     // The parameter determines the complexity of the hash, with 10 being a reasonable default.
     // The two combined make this relatively safe against brute-force attacks.
   }
-
-
 
   public Long getPoints() { return points; }
   public void setPoints(Long points) { this.points = points; }

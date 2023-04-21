@@ -27,7 +27,6 @@ public class FlagDTO {
         this.flagURL = f.getFlagURL();
     }
 
-
     public void setCorrect(Boolean correct) { isCorrect = correct; }
     public Boolean getIsCorrectCorrect() { return isCorrect; }
     public void setId(Long id) {this.id = id;}
@@ -42,6 +41,4 @@ public class FlagDTO {
     public Long getCorrect() {return correct;}
     public Long getIncorrect() {return incorrect;}
     public String getFlagURL() {return flagURL;}
-
-
 }

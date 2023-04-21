@@ -37,6 +37,6 @@ public class Populator {
     }
 
     public static void main(String[] args) {
-        System.out.println();
+        populate();
     }
 }
