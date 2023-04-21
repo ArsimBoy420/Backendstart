@@ -9,6 +9,7 @@ public class FlagDTO {
     private Long correct;
     private Long incorrect;
     private String flagURL;
+    private Boolean isCorrect;
 
     public FlagDTO(String countryName, Long answered, Long correct, Long incorrect, String flagURL) {
         this.countryName = countryName;
@@ -27,7 +28,8 @@ public class FlagDTO {
     }
 
 
-
+    public void setCorrect(Boolean correct) { isCorrect = correct; }
+    public Boolean getIsCorrectCorrect() { return isCorrect; }
     public void setId(Long id) {this.id = id;}
     public void setCountryName(String countryName) {this.countryName = countryName;}
     public void setAnswered(Long answered) {this.answered = answered;}

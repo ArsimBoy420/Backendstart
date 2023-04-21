@@ -1,7 +1,7 @@
 package entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 
 @Table(name = "flag")
 @Entity
@@ -9,7 +9,6 @@ public class Flag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -27,8 +26,10 @@ public class Flag {
 
     @Column(name = "incorrect")
     private Long incorrect;             // times answered incorrectly
+
     public Flag() {
     }
+
     public Flag(String countryName, String flagURL, Long answered, Long correct, Long incorrect) {
         this.countryName = countryName;
         this.flagURL = flagURL;
@@ -36,8 +37,6 @@ public class Flag {
         this.correct = correct;
         this.incorrect = incorrect;
     }
-
-
 
     public Flag(String countryName, String flagURL) {
         this.countryName = countryName;

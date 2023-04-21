@@ -3,14 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.mindrot.jbcrypt.BCrypt;
@@ -32,11 +25,35 @@ public class User implements Serializable {
   @Column(name = "user_pass")
   private String userPass;
 
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "points")
+  private Long points;
+
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "answered")
+  private Long answered;              // questions answered
+
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "correct")
+  private Long correct;               // questions answered correctly
+
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "incorrect")
+  private Long incorrect;           // questions answered incorrectly
+
   @JoinTable(name = "user_roles", joinColumns = {
     @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+  private List<Quiz> quizzes;
+
 
 
   public List<String> getRolesAsStrings() {
@@ -50,8 +67,6 @@ public class User implements Serializable {
     return rolesAsStrings;
   }
 
-  public User() {}
-
   //TODO Change when password is hashed
    public boolean verifyPassword(String pw){
     return BCrypt.checkpw(pw, userPass);
@@ -59,32 +74,50 @@ public class User implements Serializable {
      // Under the hood it uses the same salt that was used to create the hash to verify the password.
     }
 
+  public User() {
+  }
+
+  public User(String userName, String userPass, Long points, Long answered, Long correct, Long incorrect) {
+    this.userName = userName;
+    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    this.points = points;
+    this.answered = answered;
+    this.correct = correct;
+    this.incorrect = incorrect;
+  }
+
   public User(String userName, String userPass) {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    this.points = 0L;
+    this.answered = 0L;
+    this.correct = 0L;
+    this.incorrect = 0L;
+
     // Hashes the password. The gensalt() method automatically generates a salt to use for hashing.
     // The parameter determines the complexity of the hash, with 10 being a reasonable default.
     // The two combined make this relatively safe against brute-force attacks.
   }
 
-  public String getUserName() {
-    return userName;
-  }
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-  public String getUserPass() {
-    return this.userPass;
-  }
+
+
+  public Long getPoints() { return points; }
+  public void setPoints(Long points) { this.points = points; }
+  public Long getAnswered() { return answered; }
+  public void setAnswered(Long answered) { this.answered = answered; }
+  public Long getCorrect() { return correct; }
+  public void setCorrect(Long correct) { this.correct = correct; }
+  public Long getIncorrect() { return incorrect; }
+  public void setIncorrect(Long incorrect) { this.incorrect = incorrect; }
+  public List<Quiz> getQuizzes() { return quizzes; }
+  public void setQuizzes(List<Quiz> quizzes) { this.quizzes = quizzes; }
+
+  public String getUserName() { return userName; }
+  public void setUserName(String userName) { this.userName = userName; }
+  public String getUserPass() { return this.userPass; }
   public void setUserPass(String userPass) { this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());; }
-  public List<Role> getRoleList() {
-    return roleList;
-  }
-  public void setRoleList(List<Role> roleList) {
-    this.roleList = roleList;
-  }
-  public void addRole(Role userRole) {
-    roleList.add(userRole);
-  }
+  public List<Role> getRoleList() { return roleList; }
+  public void setRoleList(List<Role> roleList) { this.roleList = roleList; }
+  public void addRole(Role userRole) { roleList.add(userRole); }
 
 }

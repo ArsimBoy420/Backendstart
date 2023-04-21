@@ -68,7 +68,6 @@ public class FlagFacade {
                 in.close();
                 return response.toString();
             }
-
         } catch (Exception e) {
             System.out.println("Error in fetchData");
             e.printStackTrace();
