@@ -43,7 +43,7 @@ public class QuizResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response generate(@PathParam("username") String username) throws NotFoundException {
         Quiz quiz = FACADE.generateQuiz(username);
-        return Response.ok("").entity(GSON.toJson(new QuizDTO(quiz))).build();
+        return Response.ok().entity(GSON.toJson(new QuizDTO(quiz))).build();
     }
     @Path("create")
     @POST
@@ -105,5 +105,11 @@ public class QuizResource {
         return Response.ok().entity(GSON.toJson(createdDTO)).build();
     }
 
+    @Path("result/{correctId}/{answer}/{time}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Long getResult(@PathParam("correctId") Long correctId, @PathParam("answer") String answer, @PathParam("time") float time) throws NotFoundException {
+        return FACADE.getResult(correctId, answer, time);
+    }
 
 }
