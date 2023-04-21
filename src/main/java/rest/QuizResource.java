@@ -76,26 +76,20 @@ public class QuizResource {
         User user = userFacade.getUserByName(dto.getUsername());
         // Update user entity
         user.setAnswered(user.getAnswered() + 5L);
-        user.setPoints(user.getPoints() + totalPoints);
+        user.setPoints(user.getPoints() + totalPoints);// for making stats later on
         user.setCorrect(user.getCorrect() + totalCorrect);
         user.setIncorrect(user.getIncorrect() + totalIncorrect);
         userFacade.update(user);
 
-        // Update quiz entity
-        Quiz quiz = new Quiz(
-                totalPoints,
-                totalCorrect,
-                totalIncorrect,
-                questions,
-                user
-        );
+        // Create quiz entity
+        Quiz quiz = new Quiz(totalPoints, totalCorrect, totalIncorrect, questions, user);
         Quiz created = FACADE.create(quiz);
 
         QuestionFacade questionFacade = QuestionFacade.getQuestionFacade(EMF);
         FlagFacade flagFacade = FlagFacade.getFlagFacade(EMF);
-
+        // for making stats later on
         for (Question q : created.getQuestions()) {
-            q.setQuiz(created);
+            q.setQuiz(created); // set quiz ref on  all the questions in the quiz
             questionFacade.update(q);// Update question entities
             Flag flag = flagFacade.getById(q.getCorrectCountryId());
             flag.setAnswered(flag.getAnswered() + 1L);
