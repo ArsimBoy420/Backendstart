@@ -75,7 +75,7 @@ public class QuizResource {
         UserFacade userFacade = UserFacade.getUserFacade(EMF);
         User user = userFacade.getUserByName(dto.getUsername());
         // Update user entity
-        user.setAnswered(user.getAnswered() + 5L);
+        user.setAnswered(user.getAnswered() + 10L);
         user.setPoints(user.getPoints() + totalPoints);// for making stats later on
         user.setCorrect(user.getCorrect() + totalCorrect);
         user.setIncorrect(user.getIncorrect() + totalIncorrect);

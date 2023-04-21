@@ -155,10 +155,10 @@ public class QuizFacade {
         Collections.shuffle(allFlags); // shuffle all flags
         List<Question> questions = new ArrayList<>(); // list of questions
 
-        for (int i = 0; i < 5; i++) { // 5 questions
+        for (int i = 0; i < 10; i++) { // 5 questions
             Flag correctFlag = allFlags.get(i); // random flag is selected as correct flag
             Long correctCountryId = correctFlag.getId(); // id of the correct flag
-            String svg = allFlags.get(i).getFlagURL(); // svg of the correct flag
+            String svg = allFlags.get(i).getFlagSVG(); // svg of the correct flag
 
             List<Flag> newFlagsList = new ArrayList<>(allFlags); // new list of flags
             newFlagsList.remove(correctFlag); // remove correct flag from new list

@@ -8,15 +8,15 @@ public class FlagDTO {
     private Long answered;
     private Long correct;
     private Long incorrect;
-    private String flagURL;
+    private String flagSVG;
     private Boolean isCorrect;
 
-    public FlagDTO(String countryName, Long answered, Long correct, Long incorrect, String flagURL) {
+    public FlagDTO(String countryName, Long answered, Long correct, Long incorrect, String flagSVG) {
         this.countryName = countryName;
         this.answered = answered;
         this.correct = correct;
         this.incorrect = incorrect;
-        this.flagURL = flagURL;
+        this.flagSVG = flagSVG;
     }
     public FlagDTO(Flag f){
         this.id = f.getId();
@@ -24,7 +24,7 @@ public class FlagDTO {
         this.answered = f.getAnswered();
         this.correct = f.getCorrect();
         this.incorrect = f.getIncorrect();
-        this.flagURL = f.getFlagURL();
+        this.flagSVG = f.getFlagSVG();
     }
 
     public void setCorrect(Boolean correct) { isCorrect = correct; }
@@ -34,11 +34,12 @@ public class FlagDTO {
     public void setAnswered(Long answered) {this.answered = answered;}
     public void setCorrect(Long correct) {this.correct = correct;}
     public void setIncorrect(Long incorrect) {this.incorrect = incorrect;}
-    public void setFlagURL(String flagURL) {this.flagURL = flagURL;}
+    public void setFlagSVG(String flagSVG) {this.flagSVG = flagSVG;}
+
     public Long getId() {return id;}
     public String getCountryName() {return countryName;}
     public Long getAnswered() {return answered;}
     public Long getCorrect() {return correct;}
     public Long getIncorrect() {return incorrect;}
-    public String getFlagURL() {return flagURL;}
+    public String getFlagSVG() {return flagSVG;}
 }

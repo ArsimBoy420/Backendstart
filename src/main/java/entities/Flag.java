@@ -15,8 +15,8 @@ public class Flag {
     @Column(name = "country_name", nullable = false, length = 50, unique = true)
     private String countryName;
 
-    @Column(name = "flag_url", nullable = false, unique = true)
-    private String flagURL;
+    @Column(name = "flagSVG", nullable = false, unique = true)
+    private String flagSVG;
 
     @Column(name = "answered")
     private Long answered;              // times answered
@@ -30,17 +30,17 @@ public class Flag {
     public Flag() {
     }
 
-    public Flag(String countryName, String flagURL, Long answered, Long correct, Long incorrect) {
+    public Flag(String countryName, String flagSVG, Long answered, Long correct, Long incorrect) {
         this.countryName = countryName;
-        this.flagURL = flagURL;
+        this.flagSVG = flagSVG;
         this.answered = answered;
         this.correct = correct;
         this.incorrect = incorrect;
     }
 
-    public Flag(String countryName, String flagURL) {
+    public Flag(String countryName, String flagSVG) {
         this.countryName = countryName;
-        this.flagURL = flagURL;
+        this.flagSVG = flagSVG;
         this.answered = 0L;
         this.correct = 0L;
         this.incorrect = 0L;
@@ -50,8 +50,8 @@ public class Flag {
     public void setId(Long id) { this.id = id; }
     public String getCountryName() { return countryName; }
     public void setCountryName(String countryName) { this.countryName = countryName; }
-    public String getFlagURL() { return flagURL; }
-    public void setFlagURL(String flagURL) { this.flagURL = flagURL; }
+    public String getFlagSVG() { return flagSVG; }
+    public void setFlagSVG(String flagSVG) { this.flagSVG = flagSVG; }
     public Long getAnswered() { return answered; }
     public void setAnswered(Long answered) { this.answered = answered; }
     public Long getCorrect() { return correct; }
