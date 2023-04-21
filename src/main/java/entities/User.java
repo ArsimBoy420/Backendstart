@@ -41,6 +41,8 @@ public class User implements Serializable {
   @Column(name = "incorrect")
   private Long incorrect;           // questions answered incorrectly
 
+
+
   @JoinTable(name = "user_roles", joinColumns = {
     @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
