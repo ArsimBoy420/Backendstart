@@ -9,5 +9,5 @@ Content-Type: application/json
   "password": "test123"
 }
 ###
-GET http://localhost:8080/backend_start/api/info/admin
-x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2ODE4NDE5NzUsImlhdCI6MTY4MTg0MDE3NSwiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.GVmeH3rMmP6JkwuxPINBAV0xH-wYze_b_--k4lc8nls
+GET http://localhost:8080/backend_start/api/info/user
+x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2ODIwMTUwMzUsImlhdCI6MTY4MjAxMzIzNSwiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.XY_HDCOubMGPK1esmf15SrWx5cnY7STkf6kFxYJ8qv8
