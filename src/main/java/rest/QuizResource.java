@@ -29,8 +29,11 @@ import java.util.List;
 @Path("quiz")
 public class QuizResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final QuizFacade FACADE =  QuizFacade.getQuizFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final QuizFacade quizFacade = QuizFacade.getQuizFacade(EMF);
+    private static final FlagFacade flagFacade = FlagFacade.getFlagFacade(EMF);
+    private static final QuestionFacade questionFacade = QuestionFacade.getQuestionFacade(EMF);
+    private static final UserFacade userFacade = UserFacade.getUserFacade(EMF);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -42,20 +45,15 @@ public class QuizResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response generate(@PathParam("username") String username) throws NotFoundException {
-        Quiz quiz = FACADE.generateQuiz(username);
+        Quiz quiz = quizFacade.generateQuiz(username);
         return Response.ok().entity(GSON.toJson(new QuizDTO(quiz))).build();
     }
-    @Path("create")
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response create(String jsonContext) throws NotFoundException {
-        QuizDTO dto = GSON.fromJson(jsonContext, QuizDTO.class);
+    private Quiz calcQuizScore(List<QuestionDTO> questionsDTO, User user) {
         Long totalPoints = 0L;
         Long totalCorrect = 0L;
         Long totalIncorrect = 0L;
         List<Question> questions = new ArrayList<>();
-        for (QuestionDTO q : dto.getQuestions()) {
+        for (QuestionDTO q : questionsDTO) {
             questions.add(new Question(
                     q.getCorrectCountryId(),
                     q.getFlagSVG(),
@@ -67,30 +65,28 @@ public class QuizResource {
             ));
             totalPoints += q.getPoints();
             if (q.getPoints() != 0) {
-                totalCorrect ++;
+                totalCorrect++;
             } else {
-                totalIncorrect ++;
+                totalIncorrect++;
             }
         }
-        UserFacade userFacade = UserFacade.getUserFacade(EMF);
+        return new Quiz(totalPoints, totalCorrect, totalIncorrect, questions, user);
+    }
+
+    @Path("create")
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response create(String jsonContext) throws NotFoundException {
+        QuizDTO dto = GSON.fromJson(jsonContext, QuizDTO.class);
         User user = userFacade.getUserByName(dto.getUsername());
-        // Update user entity
-        user.setAnswered(user.getAnswered() + 10L);
-        user.setPoints(user.getPoints() + totalPoints);// for making stats later on
-        user.setCorrect(user.getCorrect() + totalCorrect);
-        user.setIncorrect(user.getIncorrect() + totalIncorrect);
-        userFacade.update(user);
+        Quiz temp = calcQuizScore(dto.getQuestions(), user);
+        Quiz created = quizFacade.create(temp);
 
-        // Create quiz entity
-        Quiz quiz = new Quiz(totalPoints, totalCorrect, totalIncorrect, questions, user);
-        Quiz created = FACADE.create(quiz);
-
-        QuestionFacade questionFacade = QuestionFacade.getQuestionFacade(EMF);
-        FlagFacade flagFacade = FlagFacade.getFlagFacade(EMF);
-        // for making stats later on
         for (Question q : created.getQuestions()) {
-            q.setQuiz(created); // set quiz ref on  all the questions in the quiz
-            questionFacade.update(q);// Update question entities
+            q.setQuiz(created);
+            questionFacade.update(q); // makes relation between question(20) and quiz(1)
+
             Flag flag = flagFacade.getById(q.getCorrectCountryId());
             flag.setAnswered(flag.getAnswered() + 1L);
             if (q.getPoints() > 0) {
@@ -98,9 +94,8 @@ public class QuizResource {
             } else {
                 flag.setIncorrect(flag.getIncorrect() + 1L);
             }
-            flagFacade.update(flag);  // Update flag entities
+            flagFacade.update(flag);
         }
-
         QuizDTO createdDTO = new QuizDTO(created);
         return Response.ok().entity(GSON.toJson(createdDTO)).build();
     }
@@ -109,7 +104,7 @@ public class QuizResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Long getResult(@PathParam("correctId") Long correctId, @PathParam("answer") String answer, @PathParam("time") float time) throws NotFoundException {
-        return FACADE.getResult(correctId, answer, time);
+        return quizFacade.getResult(correctId, answer, time);
     }
 
 }

@@ -74,7 +74,6 @@ public class QuizFacade {
         return null;
     }
 
-
     public Quiz create(Quiz quiz) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -122,7 +121,6 @@ public class QuizFacade {
         }
     }
 
-
     public Quiz getById(Long id) throws NotFoundException {
         EntityManager em = emf.createEntityManager();
         Quiz quiz;
@@ -144,43 +142,41 @@ public class QuizFacade {
         return query.getResultList();
     }
 
-
     public Quiz generateQuiz(String username) throws NotFoundException {
         User user = UserFacade.getUserFacade(emf).getUserByName(username);
         EntityManager em = emf.createEntityManager();
 
+        //flags
         TypedQuery<Flag> query;
         query = em.createQuery("SELECT f FROM Flag f ", Flag.class);
-        List<Flag> allFlags = query.getResultList(); // all flags
-        Collections.shuffle(allFlags); // shuffle all flags
-        List<Question> questions = new ArrayList<>(); // list of questions
+        List<Flag> allFlags = query.getResultList();
+        Collections.shuffle(allFlags);
 
-        for (int i = 0; i < 10; i++) { // 5 questions
-            Flag correctFlag = allFlags.get(i); // random flag is selected as correct flag
-            Long correctCountryId = correctFlag.getId(); // id of the correct flag
-            String svg = allFlags.get(i).getFlagSVG(); // svg of the correct flag
+        //questions
+        List<Question> questions = new ArrayList<>();
+        for (int i = 0; i < 10; i++) { // 10 questions
+            Flag correctFlag = allFlags.get(i); // pick a random flag as the correct answer
+            List<Flag> newFlagsList = new ArrayList<>(allFlags);
+            newFlagsList.remove(correctFlag);  //
+            Collections.shuffle(newFlagsList);// all flags except the correct one
 
-            List<Flag> newFlagsList = new ArrayList<>(allFlags); // new list of flags
-            newFlagsList.remove(correctFlag); // remove correct flag from new list
-            Collections.shuffle(newFlagsList); // shuffle new list
-
-            List<String> answers = new ArrayList<>(); // list of answers
+            //answers (3 wrong and 1 correct) correct is at index 0
+            List<String> answers = new ArrayList<>();
             answers.add(correctFlag.getCountryName());
             answers.add(newFlagsList.get(0).getCountryName());
             answers.add(newFlagsList.get(1).getCountryName());
             answers.add(newFlagsList.get(2).getCountryName());
-
             Collections.shuffle(answers);
 
+            //creating the question entity
             Question question = new Question(
-                    correctCountryId,
-                    svg,
+                    correctFlag.getId(),
+                    correctFlag.getFlagSVG(),
                     answers.get(0),
                     answers.get(1),
                     answers.get(2),
                     answers.get(3),
-                    0L
-            );
+                    0L);
             questions.add(question);
         }
         return new Quiz(questions, user);
