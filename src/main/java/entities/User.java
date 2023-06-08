@@ -56,7 +56,7 @@ public class User implements Serializable {
 
   public User() {
   }
-  
+
   public User(String userName, String userPass, Long points, Long answered, Long correct, Long incorrect) {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
@@ -70,9 +70,7 @@ public class User implements Serializable {
     // The two combined make this relatively safe against brute-force attacks.
   }
 
-
-  public List<Quiz> getQuizzes() { return quizzes; }
-  public void setQuizzes(List<Quiz> quizzes) { this.quizzes = quizzes; }
+  
   public String getUserName() { return userName; }
   public void setUserName(String userName) { this.userName = userName; }
   public String getUserPass() { return this.userPass; }

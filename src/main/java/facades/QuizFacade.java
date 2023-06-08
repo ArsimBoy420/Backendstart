@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Flag;
 import entities.Question;
-import entities.Quiz;
 import entities.User;
 import errorhandling.NotFoundException;
 

@@ -1,7 +1,6 @@
 package dtos;
 
 import entities.Question;
-import entities.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
