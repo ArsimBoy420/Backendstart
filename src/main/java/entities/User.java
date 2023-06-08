@@ -57,6 +57,7 @@ public class User implements Serializable {
   public User() {
   }
 
+  // sup
   public User(String userName, String userPass, Long points, Long answered, Long correct, Long incorrect) {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
