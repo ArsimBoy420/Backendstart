@@ -32,9 +32,6 @@ public class User implements Serializable {
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-  private List<Quiz> quizzes;
-
 
   public List<String> getRolesAsStrings() {
     if (roleList.isEmpty()) {
@@ -70,7 +67,7 @@ public class User implements Serializable {
     // The two combined make this relatively safe against brute-force attacks.
   }
 
-  
+
   public String getUserName() { return userName; }
   public void setUserName(String userName) { this.userName = userName; }
   public String getUserPass() { return this.userPass; }
