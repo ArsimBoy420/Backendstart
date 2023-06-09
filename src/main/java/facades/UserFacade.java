@@ -1,5 +1,7 @@
 package facades;
 
+import dtos.UserDTO;
+import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +23,9 @@ public class UserFacade {
 
     private UserFacade() {
     }
-
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
     /**
      *
      * @param _emf
@@ -99,6 +103,21 @@ public class UserFacade {
         } finally {
             em.close();
         }
+    }
+    public UserDTO createUser(UserDTO userDTO){
+        EntityManager em = getEntityManager();
+        User user = new User(userDTO.getUsername(), userDTO.getPassword());
+//        User user = em.find(User.class, userDTO.getUsername());
+        Role role = em.find(Role.class, "teacher"); //ToDo change this, if more roles where added
+        user.addRole(role);
+        try {
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new UserDTO(user);
     }
 
 

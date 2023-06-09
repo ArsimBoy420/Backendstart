@@ -1,42 +1,41 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package facades;
-//
-//
-//import entities.Hobby;
-//import entities.Person;
-//
-//import javax.persistence.EntityManagerFactory;
-//
-//import utils.EMF_Creator;
-//
-///**
-// * @author tha
-// */
-//public class Populator {
-//    public static void populate() {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package facades;
+
+import javax.persistence.EntityManagerFactory;
+
+import dtos.RenameMeDTO;
+import dtos.UserDTO;
+import entities.RenameMe;
+import entities.User;
+import utils.EMF_Creator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author tha
+ */
+public class Populator {
+    public static void populate() {
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-//        PersonFacade fe = PersonFacade.getPersonFacade(emf);
-//        PersonDTO p1 = fe.create(new PersonDTO(new Person("Jens", 45)));
-//        HobbyDTO h1 = fe.createHobby(new HobbyDTO(new Hobby("Fodbold", "Fodbold er en boldspil")));
-//        fe.addHobby(p1.getId(), h1.getId());
-//
-//    }
-//
-//    public static void removeHobbyFromPersonTest() {
-//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-//        PersonFacade fe = PersonFacade.getPersonFacade(emf);
-//        fe.removeHobbyFromPerson(1L, 1L);
-//
-//
-//    }
-//
-//
-//
-//    public static void main(String[] args) {
-//        populate();
-//    }
-//}
+       // User user = new User("Lars", "lars123");
+//        List<String> list = new ArrayList<>();
+//        UserFacade userFacade = UserFacade.getUserFacade(emf);
+//        list.add("admin");
+//        userFacade.createUser(new UserDTO("Lars", "lars123", list));
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+        FacadeExample fe = FacadeExample.getFacadeExample(emf);
+        fe.create(new RenameMeDTO(new RenameMe("First 1", "Last 1")));
+        fe.create(new RenameMeDTO(new RenameMe("First 2", "Last 2")));
+        fe.create(new RenameMeDTO(new RenameMe("First 3", "Last 3")));
+    }
+
+
+    public static void main(String[] args) {
+        populate();
+    }
+}
