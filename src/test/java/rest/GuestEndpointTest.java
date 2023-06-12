@@ -50,6 +50,14 @@ public class GuestEndpointTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        g1 = new Guest("")
+        g1 = new Guest("Loki", 12345678, "fjrnvf@gmail.com", "VIP");
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Guest.deleteAllRows").executeUpdate();
+            em.persist(g1);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 }

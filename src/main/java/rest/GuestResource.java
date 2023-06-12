@@ -3,7 +3,6 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.GuestDTO;
-import facades.FestivalFacade;
 import facades.GuestFacade;
 import utils.EMF_Creator;
 
