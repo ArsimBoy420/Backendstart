@@ -1,10 +1,15 @@
 package facades;
 
 import dtos.FestivalDTO;
+import dtos.ShowDTO;
+import entities.Festival;
+import entities.Show;
 import entities.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FestivalFacade {
 
@@ -24,6 +29,14 @@ public class FestivalFacade {
 
     public FestivalDTO createFestival(FestivalDTO festivalDTO) {
         EntityManager em = emf.getEntityManager();
-        User user = em. emf.find
+        User user = em. emf.find(User.class, festivalDTO.getName());
+        Festival festival = new Festival(festivalDTO.getName(),festivalDTO.getCity(),festivalDTO.getStartDate(),festivalDTO.getDuration());
+
+        List<Show> list = new ArrayList<>();
+        for (ShowDTO sdto : festivalDTO.getShowDTOS()) {
+            Show show = new Show(sdto.getName(),sdto.getDuration(),sdto.getLocation(),sdto.getStartDate(),sdto.getStartTime());
+            Show s = em.find(Show.class, sdto.GetShowId());
+            show.add
+        }
     }
 }

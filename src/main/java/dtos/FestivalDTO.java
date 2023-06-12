@@ -2,6 +2,9 @@ package dtos;
 
 import entities.Festival;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FestivalDTO {
 
     private long id;
@@ -9,13 +12,15 @@ public class FestivalDTO {
     String city;
     String startDate;
     String duration;
+    private List<ShowDTO> showDTOS = new ArrayList<>();
 
-    public FestivalDTO(long id, String name, String city, String startDate, String duration) {
+    public FestivalDTO(long id, String name, String city, String startDate, String duration, List<ShowDTO> showDTOS) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.startDate = startDate;
         this.duration = duration;
+        this.showDTOS = showDTOS;
     }
 
     public FestivalDTO(Festival festival) {
@@ -64,6 +69,10 @@ public class FestivalDTO {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public List<ShowDTO> getShowDTOS(){
+        return showDTOS;
     }
 
     @Override

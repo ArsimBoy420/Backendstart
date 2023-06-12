@@ -19,6 +19,7 @@ public class ShowDTO {
     private String startDate;
 
     private String startTime;
+    private Long showId;
 
     public ShowDTO(long id, String name, String duration, String location, String startDate, String startTime) {
         this.id = id;
@@ -44,6 +45,7 @@ public class ShowDTO {
         this.startTime = show.getStartTime();
     }
 
+    public Long GetShowId(){ return showId;}
     public long getId() {
         return id;
     }
