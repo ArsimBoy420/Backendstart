@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("festival")
 public class FestivalResource {
@@ -23,6 +24,14 @@ public class FestivalResource {
     public String getInForAll() { return "{\"msg\":\"festival endpoint\"}";}
 
     @GET
+    @Path("/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllFestivals() throws NotAllowedException {
+        List<FestivalDTO> festivals = festivalFacade.getAllFestivals();
+        return Response.ok().entity(GSON.toJson(festivals)).build();
+    }
+
+    @POST
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})

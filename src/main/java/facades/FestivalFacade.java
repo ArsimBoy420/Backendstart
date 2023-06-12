@@ -8,6 +8,8 @@ import entities.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import javax.ws.rs.NotAllowedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,18 +30,19 @@ public class FestivalFacade {
         return instance;
     }
 
-//    public FestivalDTO createFestival(FestivalDTO festivalDTO) {
-//        EntityManager em = emf.getEntityManager();
-//        User user = em. emf.find(User.class, festivalDTO.getName());
-//        Festival festival = new Festival(festivalDTO.getName(),festivalDTO.getCity(),festivalDTO.getStartDate(),festivalDTO.getDuration());
-//
-//        List<Show> list = new ArrayList<>();
-//        for (ShowDTO sdto : festivalDTO.getShowDTOS()) {
-//            Show show = new Show(sdto.getName(),sdto.getDuration(),sdto.getLocation(),sdto.getStartDate(),sdto.getStartTime());
-//            Show s = em.find(Show.class, sdto.GetShowId());
-//            show.add
-//        }
-//    }
+    public List<FestivalDTO> getAllFestivals() throws NotAllowedException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<FestivalDTO> query = em.createQuery("SELECT new dtos.FestivalDTO(f) FROM Festival f", FestivalDTO.class);
+            List<FestivalDTO> festivals = query.getResultList();
+            if (festivals.isEmpty()) {
+                throw new NotAllowedException("No festival found");
+            }
+            return festivals;
+        } finally {
+           em.close();
+        }
+    }
 
     public FestivalDTO createFestival(FestivalDTO festivalDTO) {
         EntityManager em = emf.createEntityManager();

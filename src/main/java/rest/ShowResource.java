@@ -46,7 +46,7 @@ public class ShowResource {
 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed("show")
+    @RolesAllowed("delete")
     public Response delete(String jsonString) throws API_Exception {
         String name;
         try {

@@ -1,7 +1,7 @@
-GET http://localhost:8080/backend_start/api/info
+GET http://localhost:8080/backendstart/api/info
 
 ###
-POST http://localhost:8080/backend_start/api/login
+POST http://localhost:8080/backendstart/api/login
 Content-Type: application/json
 
 {
@@ -9,5 +9,17 @@ Content-Type: application/json
   "password": "test123"
 }
 ###
-GET http://localhost:8080/backend_start/api/info/user
+GET http://localhost:8080/backendstart/api/info/user
 x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJleHAiOjE2ODIwMTUwMzUsImlhdCI6MTY4MjAxMzIzNSwiaXNzdWVyIjoic2VtZXN0ZXJzdGFydGNvZGUtZGF0MyIsInVzZXJuYW1lIjoiYWRtaW4ifQ.XY_HDCOubMGPK1esmf15SrWx5cnY7STkf6kFxYJ8qv8
+
+###
+POST http://localhost:8080/backendstart_war_exploded/api/festival/create
+Content-Type: application/json
+{
+"name": "Arsim",
+"city": "Valby",
+"startDate": "23/4"
+"duration": "2 timer"
+}
+###
+GET http://localhost:8080/backendstart_war_exploded/api/festival/all
