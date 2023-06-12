@@ -18,7 +18,7 @@ public class FestivalFacade {
 
     private static EntityManagerFactory emf;
     private static FestivalFacade instance;
-//    private EntityManager getEntityManager(){ return emf.createEntityManager();}
+    private EntityManager getEntityManager(){ return emf.createEntityManager();}
 
     private FestivalFacade(){}
 
@@ -42,6 +42,16 @@ public class FestivalFacade {
         } finally {
            em.close();
         }
+    }
+
+    public FestivalDTO getFestivalByName(String name) {
+        EntityManager em = getEntityManager();
+        TypedQuery<Festival> query = em.createQuery("SELECT f FROM Festival f WHERE f.name = :nt",Festival.class)
+                .setParameter("nt",name);
+        Festival festival = query.getSingleResult();
+        FestivalDTO festivalDTO = new FestivalDTO(festival);
+        em.close();
+        return festivalDTO;
     }
 
     public FestivalDTO createFestival(FestivalDTO festivalDTO) {

@@ -7,6 +7,7 @@ import facades.FestivalFacade;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,6 +30,13 @@ public class FestivalResource {
     public Response getAllFestivals() throws NotAllowedException {
         List<FestivalDTO> festivals = festivalFacade.getAllFestivals();
         return Response.ok().entity(GSON.toJson(festivals)).build();
+    }
+
+    @GET
+    @Path("/{name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getByName(@PathParam("name")String name) throws EntityNotFoundException {
+        return Response.ok().entity(GSON.toJson(festivalFacade.getFestivalByName(name))).build();
     }
 
     @POST
