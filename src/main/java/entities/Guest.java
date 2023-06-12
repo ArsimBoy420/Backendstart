@@ -8,14 +8,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "Guest")
-@NamedQuery(name = "Guest.deleteAllRows", query = "delete from Guest")
+@NamedQuery(name = "Guest.deleteAllRows", query = "DELETE from Guest")
 public class Guest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "guest_name")
+    @Column(name = "guest_name", length = 25)
     private String name;
 
     @Column(name = "phone")
@@ -30,6 +30,10 @@ public class Guest implements Serializable {
     @ManyToMany
     private List<Guest> guestList = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "festivel_id")
+    private Festival festival;
+
     public Guest(String name, int phone, String email, String status){
         this.name = name;
         this.phone = phone;
@@ -38,6 +42,14 @@ public class Guest implements Serializable {
     }
 
     public Guest(){}
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
 
     public String getName() {
         return name;

@@ -1,5 +1,7 @@
 package dtos;
 
+import entities.Guest;
+
 public class GuestDTO {
 
     private long id;
@@ -15,6 +17,8 @@ public class GuestDTO {
         this.email = email;
         this.status = status;
     }
+
+    public GuestDTO(Guest guest){}
 
     public long getId() {
         return id;

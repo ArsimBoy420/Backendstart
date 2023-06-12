@@ -7,14 +7,7 @@ package facades;
 
 import javax.persistence.EntityManagerFactory;
 
-import dtos.RenameMeDTO;
-import dtos.UserDTO;
-import entities.RenameMe;
-import entities.User;
 import utils.EMF_Creator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author tha

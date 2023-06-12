@@ -4,19 +4,24 @@ import entities.Festival;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class FestivalFacadeTest {
     private static EntityManagerFactory emf;
-    private static FestivalFacade facade;
+    private static FestivalFacade festivalFacade;
 
+    public FestivalFacadeTest() {
+    }
     @BeforeAll
     static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        facade = FestivalFacade.getFestivalFacade(emf);
+        festivalFacade = FestivalFacade.getFestivalFacade(emf);
     }
     @BeforeEach
     void setUp() {
@@ -33,6 +38,11 @@ public class FestivalFacadeTest {
     }
     @AfterEach
     void tearDown() {
+    }
+
+    @Test
+    public void cerateFastival() throws Exception {
+        assertEquals(2, festivalFacade.getAllFestivals(), "Expects two rows in the database");
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
     @Table(name = "Show")
-    @NamedQuery(name = "Show.deleteALLRows", query = "DELETE from Show")
+    @NamedQuery(name = "Show.deleteAllRows", query = "DELETE from Show")
     public class Show implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,9 @@ import java.util.List;
 
     public Show(){}
 
-        public String getName() {
+
+
+    public String getName() {
             return name;
         }
 

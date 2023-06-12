@@ -3,6 +3,8 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Festival")
@@ -26,11 +28,23 @@ public class Festival implements Serializable {
     @Column(name = "duration")
     String duration;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "festival")
+    private List<Guest> guests = new ArrayList<>();
+
     public Festival(String name, String city, String startDate, String duration) {
         this.name = name;
         this.city = city;
         this.startDate = startDate;
         this.duration = duration;
+    }
+
+
+    public List<Guest> getGuests() {
+        return guests;
+    }
+
+    public void setGuests(List<Guest> guests) {
+        this.guests = guests;
     }
 
     public Festival(){}
