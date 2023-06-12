@@ -8,7 +8,9 @@ package facades;
 import javax.persistence.EntityManagerFactory;
 
 import dtos.FestivalDTO;
+import dtos.GuestDTO;
 import entities.Festival;
+import entities.Guest;
 import utils.EMF_Creator;
 
 /**
@@ -17,18 +19,12 @@ import utils.EMF_Creator;
 public class Populator {
     public static void populate() {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-//
-//        FestivalFacade ff = FestivalFacade.getFestivalFacade(emf);
-//
-//        Festival festival = new Festival("LOKI","Valby","27/4","2 timer");
-//
-//        ff.createFestival(new FestivalDTO("Loki","valby", "27/2", "3 timer"));
 
-        // User user = new User("Lars", "lars123");
-//        List<String> list = new ArrayList<>();
-//        UserFacade userFacade = UserFacade.getUserFacade(emf);
-//        list.add("admin");
-//        userFacade.createUser(new UserDTO("Lars", "lars123", list));
+        GuestFacade gf = GuestFacade.getGuestFacade(emf);
+        gf.createGuest(new GuestDTO("bro",87654321,"bro@gmail.com","iuus"));
+//
+        FestivalFacade ff = FestivalFacade.getFestivalFacade(emf);
+        ff.createFestival(new FestivalDTO("Bigman","Hvidovre","27/4","2 timer"));
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
 //        FacadeExample fe = FacadeExample.getFacadeExample(emf);
 //        fe.create(new RenameMeDTO(new RenameMe("First 1", "Last 1")));

@@ -1,14 +1,10 @@
 package dtos;
 
 import entities.Show;
-import entities.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowDTO {
 
-    private String id;
+    private long id;
 
     private String name;
 
@@ -21,8 +17,7 @@ public class ShowDTO {
     private String startTime;
     private Long showId;
 
-    public ShowDTO(String id, String name, String duration, String location, String startDate, String startTime) {
-        this.id = id;
+    public ShowDTO(String name, String duration, String location, String startDate, String startTime) {
         this.name = name;
         this.duration = duration;
         this.location = location;
@@ -46,11 +41,11 @@ public class ShowDTO {
     }
 
     public Long GetShowId(){ return showId;}
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

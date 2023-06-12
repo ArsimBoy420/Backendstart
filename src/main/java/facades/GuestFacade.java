@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.GuestDTO;
+import entities.Guest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,7 +15,7 @@ public class GuestFacade {
 
     private GuestFacade (){}
 
-    public static GuestFacade getGuestFavade (EntityManagerFactory _emf) {
+    public static GuestFacade getGuestFacade (EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new GuestFacade();
@@ -31,6 +32,19 @@ public class GuestFacade {
                 throw new NotAllowedException("No guest found");
             }
             return guests;
+        } finally {
+            em.close();
+        }
+    }
+
+    public GuestDTO createGuest (GuestDTO guestDTO) {
+        EntityManager em = emf.createEntityManager();
+        Guest guest = new Guest(guestDTO.getName(),guestDTO.getPhone(),guestDTO.getEmail(),guestDTO.getStatus());
+        try {
+            em.getTransaction().begin();
+            em.persist(guest);
+            em.getTransaction().commit();
+            return new GuestDTO(guest);
         } finally {
             em.close();
         }

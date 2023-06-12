@@ -8,6 +8,7 @@ import entities.Show;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.NotAllowedException;
 import java.util.List;
 
 public class ShowFacade {
@@ -30,6 +31,9 @@ public class ShowFacade {
         try{
             TypedQuery<ShowDTO> query = em.createQuery("SELECT new dtos.ShowDTO(s) FROM Show s", ShowDTO.class);
             List<ShowDTO> shows = query.getResultList();
+            if (shows.isEmpty()) {
+                throw new NotAllowedException("No shows found");
+            }
             return shows;
         } finally {
             em.close();

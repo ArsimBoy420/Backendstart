@@ -14,14 +14,6 @@ public class FestivalDTO {
     String duration;
     private List<ShowDTO> showDTOS = new ArrayList<>();
 
-    public FestivalDTO(long id, String name, String city, String startDate, String duration, List<ShowDTO> showDTOS) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.startDate = startDate;
-        this.duration = duration;
-        this.showDTOS = showDTOS;
-    }
 
     public FestivalDTO(String name, String city, String startDate, String duration) {
         this.name = name;

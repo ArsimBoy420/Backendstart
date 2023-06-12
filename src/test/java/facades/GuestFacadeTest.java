@@ -1,7 +1,7 @@
 package facades;
 
-import dtos.ShowDTO;
-import entities.Show;
+import dtos.GuestDTO;
+import entities.Guest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,15 +13,17 @@ import javax.persistence.EntityManagerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ShowFacadeTest {
+public class GuestFacadeTest {
 
     private static EntityManagerFactory emf;
-    private  static ShowFacade facade;
+    private static GuestFacade guestFacade;
+
+    public GuestFacadeTest(){}
 
     @BeforeAll
     static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        facade = ShowFacade.getShowFacade(emf);
+        guestFacade = GuestFacade.getGuestFacade(emf);
     }
 
     @BeforeEach
@@ -29,24 +31,21 @@ public class ShowFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Show.deleteAllRows").executeUpdate();
-            Show show1 = new Show("Luan","1 time","Rødovre","15/7","20:00");
-            em.persist(show1);
+            em.createNamedQuery("Guest.deleteAllRows").executeUpdate();
+            Guest guest1 = new Guest("Suiii",23232323,"suuuiii@gmail.com","daddy");
+            em.persist(guest1);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
     @AfterEach
-    void tearDown() {
-    }
-    @Test
-    void createShowTest(){
-        System.out.println("create Show test!");
-        ShowDTO showDTO = new ShowDTO("Luan", "1 time", "Rødovre", "15/7","20:00");
-        ShowDTO showDTO1 = facade.createShow(showDTO);
-        assertNotNull(showDTO1.getId());
-    }
+    void tearDown(){}
 
-
+    @Test public void createGuest() {
+        System.out.println("create a Guest test!");
+        GuestDTO guestDTO = new GuestDTO("Suuui",55555555,"Suiiii@gmail.com","daddy");
+        GuestDTO guestDTO1 = guestFacade.createGuest(guestDTO);
+        assertNotNull(guestDTO1.getId());
+    }
 }

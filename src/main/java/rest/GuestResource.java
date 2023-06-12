@@ -19,7 +19,7 @@ import java.util.List;
 public class GuestResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final GuestFacade guestFacade = GuestFacade.getGuestFavade(EMF);
+    private static final GuestFacade guestFacade = GuestFacade.getGuestFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
@@ -33,5 +33,7 @@ public class GuestResource {
         List<GuestDTO> guests = guestFacade.getAllGuest();
         return Response.ok().entity(GSON.toJson(guests)).build();
     }
+
+
 }
 

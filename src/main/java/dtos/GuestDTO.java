@@ -10,15 +10,21 @@ public class GuestDTO {
     private String email;
     private String status;
 
-    public GuestDTO(long id, String name, int phone, String email, String status) {
-        this.id = id;
+    public GuestDTO(String name, int phone, String email, String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.status = status;
     }
 
-    public GuestDTO(Guest guest){}
+    public GuestDTO(Guest guest) {
+        if (guest.getName() !=null)
+            this.name = guest.getName();
+        this.phone = guest.getPhone();
+        this.email = guest.getEmail();
+        this.status = guest.getStatus();
+    }
+
 
     public long getId() {
         return id;
