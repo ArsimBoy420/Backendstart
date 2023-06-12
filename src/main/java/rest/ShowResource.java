@@ -34,6 +34,17 @@ public class ShowResource {
         return Response.ok().entity(GSON.toJson(showFacade.getAllShows())).build();
     }
 
+    @POST
+    @Path("/create")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response createShow(String show) {
+        ShowDTO showDTO = GSON.fromJson(show, ShowDTO.class);
+        ShowDTO created = showFacade.createShow(showDTO);
+        return Response.ok().entity(GSON.toJson(created)).build();
+    }
+
+
     @PUT
     @Path("update/")
     @Produces({MediaType.APPLICATION_JSON})

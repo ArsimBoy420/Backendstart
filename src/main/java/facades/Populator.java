@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 
 import dtos.FestivalDTO;
 import dtos.GuestDTO;
+import dtos.ShowDTO;
 import entities.Festival;
 import entities.Guest;
 import utils.EMF_Creator;
@@ -25,6 +26,9 @@ public class Populator {
 //
         FestivalFacade ff = FestivalFacade.getFestivalFacade(emf);
         ff.createFestival(new FestivalDTO("Bigman","Hvidovre","27/4","2 timer"));
+
+        ShowFacade sf = ShowFacade.getShowFacade(emf);
+        sf.createShow(new ShowDTO("Fast X","1 time","Rødovre","27/4","20:00"));
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
 //        FacadeExample fe = FacadeExample.getFacadeExample(emf);
 //        fe.create(new RenameMeDTO(new RenameMe("First 1", "Last 1")));

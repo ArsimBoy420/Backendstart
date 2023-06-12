@@ -22,4 +22,24 @@ Content-Type: application/json
 "duration": "2 timer"
 }
 ###
-GET http://localhost:8080/backendstart_war_exploded/api/guest/all
+GET http://localhost:8080/backendstart_war_exploded/api/festival/all
+
+###
+PUT http://localhost:8080/backendstart_war_exploded/api/festival/update
+{
+"id": 0,
+"name": "smallman",
+"city": "Hvidovre",
+"duration": "2 timer",
+"startDate": "27/4"
+}
+
+###
+POST http://localhost:8080/backendstart_war_exploded/api/show/create
+Content-Type: application/json
+{
+"name": "muuu",
+"duration": "1 time",
+"location": "Hvidovre",
+"startDate": "27/5"
+}
