@@ -21,8 +21,9 @@ Content-Type: application/json
 "startDate": "23/4"
 "duration": "2 timer"
 }
+
 ###
-GET http://localhost:8080/backendstart_war_exploded/api/guest/all
+GET http://localhost:8080/backendstart_war_exploded/api/festival/all
 
 ###
 PUT http://localhost:8080/backendstart_war_exploded/api/festival/update
@@ -42,4 +43,14 @@ Content-Type: application/json
 "duration": "1 time",
 "location": "Hvidovre",
 "startDate": "27/5"
+}
+
+###
+POST http://localhost:8080/backendstart_war_exploded/api/guest/create
+Content-Type: application/json
+{
+"name": "Lars",
+"phone": 88888888,
+"email": "Lars@gmail.com",
+"status": "VIP"
 }

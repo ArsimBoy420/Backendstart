@@ -28,6 +28,7 @@ public class Populator {
 
         FestivalFacade ff = FestivalFacade.getFestivalFacade(emf);
         ff.createFestival(new FestivalDTO("Bigman","Hvidovre","27/4","2 timer"));
+        ff.createFestival(new FestivalDTO("Smallman","ølby","22/5","3 timer"));
 
 //        ShowFacade sf = ShowFacade.getShowFacade(emf);
 //        sf.createShow(new ShowDTO("Fast X","1 time","Rødovre","27/4","20:00"));

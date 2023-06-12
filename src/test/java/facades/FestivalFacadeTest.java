@@ -43,7 +43,7 @@ public class FestivalFacadeTest {
     }
 
     @Test
-    public void createFastival() {
+    public void createFestival() {
         System.out.println("create Festival test!");
         FestivalDTO festivalDTO = new FestivalDTO("Andrim","Hvidovre","11/2","3 timer");
         FestivalDTO festivalDTO1 = festivalFacade.createFestival(festivalDTO);
