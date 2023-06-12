@@ -7,10 +7,7 @@ import facades.FestivalFacade;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,5 +30,15 @@ public class FestivalResource {
         FestivalDTO festivalDTO = GSON.fromJson(festival, FestivalDTO.class);
         FestivalDTO created = festivalFacade.createFestival(festivalDTO);
         return Response.ok().entity(GSON.toJson(created)).build();
+    }
+
+    @PUT
+    @Path("update/")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response updateFestivals(String content){
+        FestivalDTO festivalDTO = GSON.fromJson(content, FestivalDTO.class);
+        FestivalDTO newFestivalDTO = festivalFacade.updateFestivals(festivalDTO);
+        return Response.ok().entity(GSON.toJson(newFestivalDTO)).build();
     }
 }
