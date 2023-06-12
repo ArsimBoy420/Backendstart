@@ -3,12 +3,13 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-    @Table(name = "Show")
-    @NamedQuery(name = "Show.deleteAllRows", query = "DELETE from Show")
-    public class Show implements Serializable {
+@Table(name = "Show")
+@NamedQuery(name = "Show.deleteAllRows", query = "DELETE from Show")
+public class Show implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,8 +31,9 @@ import java.util.List;
     @Column(name = "startTime")
     private String startTime;
 
-    @ManyToMany(mappedBy = "guestList")
-    private List<Guest> guestList;
+    @ManyToMany()
+    private List<Guest> guestList = new ArrayList<>();
+
 
     public Show(String name, String duration, String location, String startDate, String startTime) {
         this.name = name;

@@ -72,7 +72,7 @@ public class FestivalEndpointTest {
     @Test
     public void testServerIsUp(){given().when().get("/xxx").then().statusCode(200);}
 
-    
+
     @Test
     void getAll()
     {

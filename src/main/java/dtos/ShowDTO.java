@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ShowDTO {
 
-    private long id;
+    private String id;
 
     private String name;
 
@@ -21,7 +21,7 @@ public class ShowDTO {
     private String startTime;
     private Long showId;
 
-    public ShowDTO(long id, String name, String duration, String location, String startDate, String startTime) {
+    public ShowDTO(String id, String name, String duration, String location, String startDate, String startTime) {
         this.id = id;
         this.name = name;
         this.duration = duration;
@@ -46,11 +46,11 @@ public class ShowDTO {
     }
 
     public Long GetShowId(){ return showId;}
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

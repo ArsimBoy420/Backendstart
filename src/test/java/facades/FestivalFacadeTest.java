@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.FestivalDTO;
 import entities.Festival;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FestivalFacadeTest {
     private static EntityManagerFactory emf;
@@ -41,8 +43,11 @@ public class FestivalFacadeTest {
     }
 
     @Test
-    public void cerateFastival() throws Exception {
-        assertEquals(2, festivalFacade.getAllFestivals(), "Expects two rows in the database");
+    public void cerateFastival() {
+        System.out.println("create Festival test!");
+        FestivalDTO festivalDTO = new FestivalDTO("Andrim","Hvidovre","11/2","3 timer");
+        FestivalDTO festivalDTO1 = festivalFacade.createFestival(festivalDTO);
+        assertNotNull(festivalDTO1.getId());
     }
 
 }

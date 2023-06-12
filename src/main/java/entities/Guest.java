@@ -27,8 +27,8 @@ public class Guest implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @ManyToMany
-    private List<Guest> guestList = new ArrayList<>();
+    @ManyToMany(mappedBy = "guestList")
+    private List<Show> showList;
 
     @ManyToOne
     @JoinColumn(name = "festivel_id")
@@ -83,13 +83,6 @@ public class Guest implements Serializable {
         this.status = status;
     }
 
-    public List<Guest> getGuestList() {
-        return guestList;
-    }
-
-    public void setGuestList(List<Guest> guestList) {
-        this.guestList = guestList;
-    }
 
     @Override
     public String toString() {
@@ -98,7 +91,6 @@ public class Guest implements Serializable {
                 ", phone=" + phone +
                 ", email='" + email + '\'' +
                 ", status='" + status + '\'' +
-                ", guestList=" + guestList +
                 '}';
     }
 }

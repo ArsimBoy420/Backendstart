@@ -36,6 +36,19 @@ public class ShowFacade {
         }
     }
 
+    public ShowDTO createShow(ShowDTO showDTO) {
+        EntityManager em = emf.createEntityManager();
+        Show show = new Show(showDTO.getName(),showDTO.getDuration(),showDTO.getLocation(),showDTO.getStartDate(),showDTO.getStartTime());
+        try {
+            em.getTransaction().begin();
+            em.persist(show);
+            em.getTransaction().commit();
+            return new ShowDTO(show);
+        } finally {
+            em.close();
+        }
+    }
+
     public ShowDTO updateShow(ShowDTO sh) {
         EntityManager em = emf.createEntityManager();
         Show s = (em.find(Show.class, sh.getId()));

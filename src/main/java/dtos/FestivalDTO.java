@@ -23,6 +23,13 @@ public class FestivalDTO {
         this.showDTOS = showDTOS;
     }
 
+    public FestivalDTO(String name, String city, String startDate, String duration) {
+        this.name = name;
+        this.city = city;
+        this.startDate = startDate;
+        this.duration = duration;
+    }
+
     public FestivalDTO(Festival festival) {
         if (festival.getName() != null)
             this.name = festival.getName();
