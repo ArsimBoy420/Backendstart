@@ -22,7 +22,7 @@ Content-Type: application/json
 "duration": "2 timer"
 }
 ###
-GET http://localhost:8080/backendstart_war_exploded/api/festival/all
+GET http://localhost:8080/backendstart_war_exploded/api/guest/all
 
 ###
 PUT http://localhost:8080/backendstart_war_exploded/api/festival/update

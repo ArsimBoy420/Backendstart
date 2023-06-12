@@ -88,4 +88,17 @@ public class ShowDTO {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
+
+    @Override
+    public String toString() {
+        return "ShowDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", duration='" + duration + '\'' +
+                ", location='" + location + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", showId=" + showId +
+                '}';
+    }
 }

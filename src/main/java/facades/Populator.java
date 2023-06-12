@@ -23,12 +23,14 @@ public class Populator {
 
         GuestFacade gf = GuestFacade.getGuestFacade(emf);
         gf.createGuest(new GuestDTO("bro",87654321,"bro@gmail.com","iuus"));
-//
+        gf.createGuest(new GuestDTO("BroDude",90909090,"BroDude@gmail.com","VIP"));
+
+
         FestivalFacade ff = FestivalFacade.getFestivalFacade(emf);
         ff.createFestival(new FestivalDTO("Bigman","Hvidovre","27/4","2 timer"));
 
-        ShowFacade sf = ShowFacade.getShowFacade(emf);
-        sf.createShow(new ShowDTO("Fast X","1 time","Rødovre","27/4","20:00"));
+//        ShowFacade sf = ShowFacade.getShowFacade(emf);
+//        sf.createShow(new ShowDTO("Fast X","1 time","Rødovre","27/4","20:00"));
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
 //        FacadeExample fe = FacadeExample.getFacadeExample(emf);
 //        fe.create(new RenameMeDTO(new RenameMe("First 1", "Last 1")));
